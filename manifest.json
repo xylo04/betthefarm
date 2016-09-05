@@ -1,0 +1,7 @@
+{
+  "name": "betthefarm",
+  "short_name": "betthefarm",
+  "description": "Calculator app for Bet The Farm robotics game",
+  "start_url": "/",
+  "display": "standalone"
+}

@@ -1,0 +1,20 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/paper-header-panel/paper-header-panel.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="betthefarm-main.html">
+
+<dom-module id="betthefarm-app">
+  <style include="iron-flex iron-positioning"></style>
+
+  <template>
+    <paper-header-panel>
+      <paper-toolbar><h1>Bet The Farm!</h1></paper-toolbar>
+      <div><betthefarm-main></betthefarm-main></div>
+    </paper-header-panel>
+  </template>
+
+  <script>
+    Polymer({ is: 'betthefarm-app' });
+  </script>
+</dom-module>
