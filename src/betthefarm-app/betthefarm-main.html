@@ -19,7 +19,7 @@
     }
 
     .pointslabel {
-      @apply(--layout-flex-4);
+      @apply(--layout-flex-3);
     }
 
     paper-slider {
@@ -27,8 +27,14 @@
     }
 
     .pointsmultiplier {
-      @apply(--layout-flex-4);
+      @apply(--layout-flex-3);
       color: dimgrey;
+    }
+
+    @media only screen and (max-device-width: 480px) {
+      .pointsmultiplier {
+        display: none;
+      }
     }
 
     #total {
