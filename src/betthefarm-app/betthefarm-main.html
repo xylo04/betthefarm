@@ -1,0 +1,158 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="../../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../../bower_components/paper-radio-group/paper-radio-group.html">
+
+<dom-module id="betthefarm-main">
+  <style include="iron-flex iron-positioning">
+    #content-main {
+      margin: 16px;
+      padding: 8px;
+      max-width: 600px;
+    }
+
+    .pointscore {
+      @apply(--layout-horizontal);
+      @apply(--layout-center);
+    }
+
+    #total {
+      font-size: x-large;
+      font-weight: bolder;
+    }
+  </style>
+
+  <template>
+    <div id="content-main">
+      <div class="pointscore">
+        Corn Harvested in Team Bin
+        <paper-slider value="{{cornTeamValue}}" max="24" editable></paper-slider>
+        x 20 points
+      </div>
+      <div class="pointscore">
+        Corn Harvested in Co-op Bin
+        <paper-slider value="{{cornCoopValue}}" max="24" editable></paper-slider>
+        x 5 points (all teams)
+      </div>
+      <div class="pointscore">
+        Tomatoes Harvested
+        <paper-slider value="{{tomatoesValue}}" max="32" editable></paper-slider>
+        x 20 points
+      </div>
+      <div class="pointscore">
+        Lettuce Harvested
+        <paper-slider value="{{lettuceValue}}" max="8" editable></paper-slider>
+        x 15 points
+      </div>
+      <div class="pointscore">
+        Corn Seeds Planted
+        <paper-slider value="{{cornSeedsValue}}" max="24" editable></paper-slider>
+        x 10 points
+      </div>
+      <div class="pointscore">
+        Pigs Returned to Pen
+        <paper-slider value="{{pigsValue}}" max="5" editable></paper-slider>
+        x 10 points
+      </div>
+      <div class="pointscore">
+        Feed the Pigs Corn
+        <paper-slider value="{{feedPigsValue}}" max="5" editable></paper-slider>
+        x 10 points per pig
+      </div>
+      <div class="pointscore">
+        Water Valve
+        <paper-radio-group id="waterValveGroup" selected="{{waterValveSelected}}">
+          <paper-radio-button name="closed" value="0">Closed</paper-radio-button>
+          <paper-radio-button name="under" value="50">Underwater</paper-radio-button>
+          <paper-radio-button name="open" value="100">Open</paper-radio-button>
+          <paper-radio-button name="over" value="50">Overwater</paper-radio-button>
+        </paper-radio-group>
+      </div>
+      <div id="total">Total points: [[totalScore]]</div>
+      <paper-button id="reset">Reset</paper-button>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'betthefarm-main',
+
+      properties: {
+        cornTeamValue: Number,
+        cornCoopValue: Number,
+        tomatoesValue: Number,
+        lettuceValue: Number,
+        cornSeedsValue: Number,
+        pigsValue: Number,
+        feedPigsValue: Number,
+        waterValveSelected: {
+          type: String,
+          value: "closed"
+        },
+        totalScore: {
+          type: Number,
+          computed: 'scoreGame(cornTeamValue, cornCoopValue, tomatoesValue, lettuceValue,' +
+                    ' cornSeedsValue, pigsValue, feedPigsValue, waterValveSelected)'
+        }
+      },
+
+      listeners: {
+        'reset.tap': 'resetScores'
+      },
+
+      scoreGame: function (cornTeamValue, cornCoopValue, tomatoesValue, lettuceValue,
+                           cornSeedsValue, pigsValue, feedPigsValue, waterValveSelected) {
+        var score = 0;
+        score += cornTeamValue * 20;
+        score += cornCoopValue * 5;
+        score += tomatoesValue * 20;
+        score += lettuceValue * 15;
+        score += cornSeedsValue * 10;
+        score += pigsValue * 10;
+
+        switch (waterValveSelected) {
+          case "open":
+            score += 100;
+            break;
+          case "under":
+          case "over":
+            score += 50;
+            break;
+          default:
+            break;
+        }
+
+        // feed the pigs
+        var fedPigs = Math.min(pigsValue, feedPigsValue);
+        score += fedPigs * 10;
+
+        // plant & harvest corn
+        var plantAndHarvest = Math.min(cornTeamValue, cornSeedsValue);
+        score += plantAndHarvest * 30;
+
+        // harvest diversity
+        var harvestDiversity = Math.min(cornTeamValue, tomatoesValue, lettuceValue);
+        if (harvestDiversity > 4) {
+          harvestDiversity = 4;
+        }
+        score += harvestDiversity * 50;
+
+        return score;
+      },
+
+      resetScores: function () {
+        this.cornTeamValue = 0;
+        this.cornCoopValue = 0;
+        this.tomatoesValue = 0;
+        this.lettuceValue = 0;
+        this.cornSeedsValue = 0;
+        this.pigsValue = 0;
+        this.feedPigsValue = 0;
+        this.waterValveSelected = "closed";
+      }
+    });
+
+  </script>
+</dom-module>

@@ -1,8 +1,19 @@
+<!doctype html>
+
 <html>
-<head>
-  <title>Bet The Farm!</title>
-</head>
-<body>
-<h1>Bet The Farm!</h1>
-</body>
+  <head>
+    <title>Bet The Farm!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="/manifest.json">
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="/bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+    <link rel="import" href="/src/betthefarm-app/betthefarm-app.html">
+
+    <style is="custom-style" include="iron-flex iron-positioning"></style>
+  </head>
+  <body class="fullbleed layout vertical">
+    <betthefarm-app class="flex layout vertical"></betthefarm-app>
+  </body>
 </html>
