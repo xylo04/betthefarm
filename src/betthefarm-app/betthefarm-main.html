@@ -20,27 +20,30 @@
     }
 
     .pointslabel {
-      @apply(--layout-flex-3);
-      max-width: 150pt;
+      width: 150pt;
     }
 
     paper-slider {
-      @apply(--layout-flex-4);
+      @apply(--layout-flex);
       --paper-slider-active-color: var(--primary-color);
       --paper-slider-secondary-color: var(--light-primary-color);
       --paper-slider-knob-color: var(--primary-color);
     }
 
     #waterValveGroup {
-      @apply(--layout-flex-4);
+      @apply(--layout-flex);
     }
 
     .pointsmultiplier {
-      @apply(--layout-flex-3);
+      width: 110pt;
       color: dimgrey;
     }
 
-    @media only screen and (max-device-width: 480px) {
+    @media only screen and (max-width: 600px) {
+      .pointslabel {
+        width: 90pt;
+      }
+
       .pointsmultiplier {
         display: none;
       }
