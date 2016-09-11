@@ -2,6 +2,7 @@
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="../../bower_components/paper-toggle-button/paper-toggle-button.html">
 <link rel="import" href="../../bower_components/paper-radio-button/paper-radio-button.html">
 <link rel="import" href="../../bower_components/paper-radio-group/paper-radio-group.html">
 
@@ -17,6 +18,7 @@
     .pointscore {
       @apply(--layout-horizontal);
       @apply(--layout-center);
+      min-height: 30px;
     }
 
     .pointslabel {
@@ -101,6 +103,14 @@
           <paper-radio-button name="over" value="50">Overwater</paper-radio-button>
         </paper-radio-group>
       </div>
+      <div class="pointscore">
+        <div class="pointslabel">Corn Plant and Harvest</div>
+        <paper-toggle-button checked="{{cornPlantAndHarvestBonusValue}}" disabled="true"></paper-toggle-button>
+      </div>
+      <div class="pointscore">
+        <div class="pointslabel">Harvest Diversity</div>
+        <paper-toggle-button checked="{{harvestDiversityBonusValue}}" disabled="true"></paper-toggle-button>
+      </div>
       <div id="total">Total points: [[totalScore]]</div>
       <paper-button id="reset">Reset</paper-button>
     </div>
@@ -122,6 +132,8 @@
           type: String,
           value: "closed"
         },
+        cornPlantAndHarvestBonusValue: Boolean,
+        harvestDiversityBonusValue: Boolean,
         totalScore: {
           type: Number,
           computed: 'scoreGame(cornTeamValue, cornCoopValue, tomatoesValue, lettuceValue,' +
@@ -161,6 +173,7 @@
 
         // plant & harvest corn
         var plantAndHarvest = Math.min(cornTeamValue, cornSeedsValue);
+        this.cornPlantAndHarvestBonusValue = plantAndHarvest > 0;
         score += plantAndHarvest * 30;
 
         // harvest diversity
@@ -168,6 +181,7 @@
         if (harvestDiversity > 4) {
           harvestDiversity = 4;
         }
+        this.harvestDiversityBonusValue = harvestDiversity > 0;
         score += harvestDiversity * 50;
 
         return score;
