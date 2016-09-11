@@ -8,9 +8,10 @@
 <dom-module id="betthefarm-main">
   <style include="iron-flex iron-positioning">
     #content-main {
+      @apply(--layout-vertical);
+      @apply(--layout-center-justified);
       margin: 16px;
       padding: 8px;
-      max-width: 600px;
     }
 
     .pointscore {
@@ -20,9 +21,17 @@
 
     .pointslabel {
       @apply(--layout-flex-3);
+      max-width: 150pt;
     }
 
     paper-slider {
+      @apply(--layout-flex-4);
+      --paper-slider-active-color: var(--primary-color);
+      --paper-slider-secondary-color: var(--light-primary-color);
+      --paper-slider-knob-color: var(--primary-color);
+    }
+
+    #waterValveGroup {
       @apply(--layout-flex-4);
     }
 

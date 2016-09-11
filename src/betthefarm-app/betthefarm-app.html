@@ -5,12 +5,26 @@
 <link rel="import" href="betthefarm-main.html">
 
 <dom-module id="betthefarm-app">
-  <style include="iron-flex iron-positioning"></style>
+  <style include="iron-flex iron-positioning">
+    :root {
+      --primary-color: var(--paper-green-500);
+      --light-primary-color: var(--paper-green-100);
+      --dark-primary-color: var(--paper-green-700);
+    }
+
+    .flex-center-justified {
+      @apply(--layout-vertical);
+      @apply(--layout-center-justified);
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 800px;
+    }
+  </style>
 
   <template>
     <paper-header-panel>
       <paper-toolbar><h1>Bet The Farm!</h1></paper-toolbar>
-      <div><betthefarm-main></betthefarm-main></div>
+      <betthefarm-main class="container flex-center-justified"></betthefarm-main>
     </paper-header-panel>
   </template>
 
