@@ -1,6 +1,6 @@
-# \<betthefarm\>
+# Bet The Farm!
 
-Calculator app for Bet The Farm robotics game
+A calculator app for the BEST Robotics 2016 game.
 
 ## Install the Polymer-CLI
 
