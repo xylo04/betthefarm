@@ -1,6 +1,6 @@
 # Bet The Farm!
 
-A calculator app for the BEST Robotics 2016 game.
+A calculator app for the BEST Robotics 2016 game. Hosted at https://betthefarm-142518.appspot.com/.
 
 ## Install the Polymer-CLI
 
